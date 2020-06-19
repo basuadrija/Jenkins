@@ -15,6 +15,6 @@ public class DemoController {
 
 	@GetMapping(value="/hi")
 	public String sendResponse() {
-		return "Hello-World: Welcome to VM";
+		return "Hello-World: Testing Poll SCM";
 	}
 }
