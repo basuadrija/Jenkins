@@ -1,13 +1,11 @@
-
-@Library('my-shared-library') _
 pipeline{
     agent any
     stages {
         stage('git Checkout'){
             steps{
-                
+                script{
                     gitCheckout(
-                        branch: "master" ,
+                        branch: "master"
                         url: "https://github.com/basuadrija/Jenkins.git"
                     )
                 }
@@ -22,5 +20,13 @@ pipeline{
             }
         }
 
+        stage('Integration Test Maven'){
+            steps{
+                script{
+                    mvnIntegrationTest()
+                }
+            }
         }
-    
+
+        }
+    }
