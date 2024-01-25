@@ -5,7 +5,7 @@ pipeline{
     stages {
         stage('git Checkout'){
             steps{
-                script{
+                
                     gitCheckout(
                         branch: "master"
                         url: "https://github.com/basuadrija/Jenkins.git"
@@ -15,4 +15,4 @@ pipeline{
         }
 
         }
-    }
+    
