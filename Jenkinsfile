@@ -9,7 +9,9 @@ pipeline{
                         url: "https://github.com/basuadrija/Jenkins.git"
                     )
                 }
+           
             }
+        }
         
 
         stage('Unit Test Maven'){
