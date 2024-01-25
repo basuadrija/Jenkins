@@ -5,7 +5,7 @@ pipeline{
             steps{
                 script{
                     gitCheckout(
-                        branch: "master"
+                        branch: "master",
                         url: "https://github.com/basuadrija/Jenkins.git"
                     )
                 }
