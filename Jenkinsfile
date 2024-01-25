@@ -10,7 +10,7 @@ pipeline{
                     )
                 }
             }
-        }
+        
 
         stage('Unit Test Maven'){
             steps{
@@ -20,6 +20,7 @@ pipeline{
             }
         }
 
+<<<<<<< HEAD
         stage('Integration Test Maven'){
             steps{
                 script{
@@ -30,3 +31,8 @@ pipeline{
 
         }
     }
+=======
+    }
+}
+    
+>>>>>>> 4940cad4fadd85402be622e875dc278ce49998f7
