@@ -8,6 +8,12 @@ pipeline{
   string(name: 'Region', description: "Region of ECR", defaultValue: 'us-east-1')
   string(name: 'ECR_REPO_NAME', description: "name of the ECR", defaultValue: 'new-repo')
 }
+    environment{
+
+        ACCESS_KEY = credentials('AWS_ACCESS_KEY_ID')
+        SECRET_KEY = credentials('AWS_SECRET_KEY_ID')
+    }
+
 
     stages {
 
@@ -86,6 +92,9 @@ pipeline{
             when { expression { params.action == 'create' } }
             steps{
                 script{
+                    aws configure set aws_access_key_id "$ACCESS_KEY"
+                    aws configure set aws_secret_access_key "$SECRET_KEY"
+                    aws configure set region "${params.Region}"
                     dockerPush("${params.aws_account_id}","${params.Region}","${params.ECR_REPO_NAME}")
                 }
             }
