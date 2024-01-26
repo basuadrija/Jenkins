@@ -51,5 +51,15 @@ pipeline{
             }
         }
 
+        stage('Quality Gate Status Check'){
+            when { expression { params.action == 'create' } }
+            steps{
+                script{
+                    def SonarQubecredentialsId = 'sonarwithjenkins'
+                    qualityGateStatus(SonarQubecredentialsId)
+                }
+            }
+        }
+
         }
     }
