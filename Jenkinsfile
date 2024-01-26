@@ -86,7 +86,7 @@ pipeline{
             when { expression { params.action == 'create' } }
             steps{
                 script{
-                    dockerBuild("${params.aws_account_id}","${params.Region}","${params.ECR_REPO_NAME}")
+                    dockerPush("${params.aws_account_id}","${params.Region}","${params.ECR_REPO_NAME}")
                 }
             }
         }
