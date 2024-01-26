@@ -92,10 +92,13 @@ pipeline{
             when { expression { params.action == 'create' } }
             steps{
                 script{
+                    sh """
                     aws configure set aws_access_key_id "$ACCESS_KEY"
                     aws configure set aws_secret_access_key "$SECRET_KEY"
                     aws configure set region "${params.Region}"
-                    dockerPush("${params.aws_account_id}","${params.Region}","${params.ECR_REPO_NAME}")
+                    aws ecr get-login-password --region ${params.Region} | docker login --username AWS --password-stdin ${params.aws_account_id}.dkr.ecr.${params.Region}.amazonaws.com
+                    docker push ${params.aws_account_id}.dkr.ecr.${params.Region}.amazonaws.com/${params.ECR_REPO_NAME}:latest
+                    """
                 }
             }
         }
