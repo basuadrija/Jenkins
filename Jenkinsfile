@@ -4,6 +4,9 @@ pipeline{
 
     parameters {
   choice choices: ['create', 'destroy'], description: 'Choose create or destroy', name: 'action'
+  string(name: 'aws_account_id', description: " AWS Account ID", defaultValue: '381492133360')
+  string(name: 'Region', description: "Region of ECR", defaultValue: 'us-east-1')
+  string(name: 'ECR_REPO_NAME', description: "name of the ECR", defaultValue: 'new-repo')
 }
 
     stages {
@@ -74,7 +77,16 @@ pipeline{
             when { expression { params.action == 'create' } }
             steps{
                 script{
-                    dockerBuild()
+                    dockerBuild("${params.aws_account_id}","${params.Region}","${params.ECR_REPO_NAME}")
+                }
+            }
+        }
+
+        stage('Image Push ECR'){
+            when { expression { params.action == 'create' } }
+            steps{
+                script{
+                    dockerBuild("${params.aws_account_id}","${params.Region}","${params.ECR_REPO_NAME}")
                 }
             }
         }
