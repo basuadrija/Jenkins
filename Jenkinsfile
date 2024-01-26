@@ -70,5 +70,14 @@ pipeline{
             }
         }
 
+        stage('Build Image with  Docker'){
+            when { expression { params.action == 'create' } }
+            steps{
+                script{
+                    dockerBuild()
+                }
+            }
+        }
+
         }
     }
