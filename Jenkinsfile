@@ -103,5 +103,14 @@ pipeline{
             }
         }
 
+        post{
+            success{
+                    mail bcc: '', body: '''Hello 
+
+                    The job is successful please check
+
+                    Thanks
+                    Adrija''', cc: '', from: '', replyTo: '', subject: 'Jenkins', to: 'adrija.tina93@gmail.com'
+
         }
     }
