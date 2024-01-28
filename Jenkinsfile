@@ -105,6 +105,17 @@ pipeline{
     }
 
         post{
+            always{
+                    script{
+                        sh """
+                        aws configure set aws_access_key_id "$ACCESS_KEY"
+                        aws configure set aws_secret_access_key "$SECRET_KEY"
+                        aws configure set region "${params.Region}"
+                        aws ecr get-login-password --region ${params.Region} | docker login --username AWS --password-stdin ${params.aws_account_id}.dkr.ecr.${params.Region}.amazonaws.com
+                        docker pull ${params.aws_account_id}.dkr.ecr.${params.Region}.amazonaws.com/${params.ECR_REPO_NAME}:latest
+                        """
+                    }
+            }
             success{
                     mail bcc: '', body: '''Hello 
 
